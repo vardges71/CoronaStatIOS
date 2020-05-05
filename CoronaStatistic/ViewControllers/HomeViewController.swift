@@ -38,13 +38,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var globalStatisticTableView: UITableView!
     
     @IBAction func logOutTapped(_ sender: Any) {
-        
-        do {
-            try Auth.auth().signOut()
-            self.dismiss(animated: true, completion: nil)
-            } catch let err {
-                print(err)
-        }
+
+        Utilities.logOut()
         
         let firstVC = self.storyboard?.instantiateViewController(identifier: Constants.Stroryboard.firstVC) as? ViewController
         

@@ -60,13 +60,16 @@ class Utilities {
     
     static func isPasswordValid(_ password : String) -> Bool {
         
-        let passwordTest = NSPredicate(format: "SELF MATCHES %@", "^(?=.*[a-z])(?=.*[$@$#!%*?&])[A-Za-z\\d$@$#!%*?&]{8,}")
+        let pwdRegEx = "(?:(?:(?=.*?[0-9])(?=.*?[-!@#$%&*ˆ+=_])|(?:(?=.*?[0-9])|(?=.*?[A-Z])|(?=.*?[-!@#$%&*ˆ+=_])))|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!@#$%&*ˆ+=_]))[A-Za-z0-9-!@#$%&*ˆ+=_]{6,15}"
+        
+        let passwordTest = NSPredicate(format: "SELF MATCHES %@", pwdRegEx)
+        
         return passwordTest.evaluate(with: password)
     }
     
     static func logOut() {
         
-            let firebaseAuth = Auth.auth()
+        let firebaseAuth = Auth.auth()
         
         do {
             
