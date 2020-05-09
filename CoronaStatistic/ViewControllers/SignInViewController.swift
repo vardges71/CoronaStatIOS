@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import Firebase
+import FirebaseFirestore
 
 class SignInViewController: UIViewController {
 
@@ -21,11 +22,14 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var errorLable: UILabel!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupElements()
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     func setupElements() {

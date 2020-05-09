@@ -19,4 +19,10 @@ struct Constants {
         static let countryStatistic = "CountryStatisticVC"
         static let countryTLStatistic = "CTStatisticVC"
     }
+    
+    struct TimelineArray {
+        
+        static var datesCount = 0
+        
+    }
 }

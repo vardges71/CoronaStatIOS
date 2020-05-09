@@ -35,8 +35,9 @@ class Utilities {
         
         // Set background Color
         textfield.backgroundColor = UIColor.init(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.9)
-        
+    
     }
+    
     
     static func styleFilledButton(_ button:UIButton) {
         
@@ -58,6 +59,8 @@ class Utilities {
         button.tintColor = UIColor.black
     }
     
+// **************************** Password Validate *********************************************************
+    
     static func isPasswordValid(_ password : String) -> Bool {
         
         let pwdRegEx = "(?:(?:(?=.*?[0-9])(?=.*?[-!@#$%&*ˆ+=_])|(?:(?=.*?[0-9])|(?=.*?[A-Z])|(?=.*?[-!@#$%&*ˆ+=_])))|(?=.*?[a-z])(?=.*?[0-9])(?=.*?[-!@#$%&*ˆ+=_]))[A-Za-z0-9-!@#$%&*ˆ+=_]{6,15}"
@@ -66,6 +69,7 @@ class Utilities {
         
         return passwordTest.evaluate(with: password)
     }
+// ********************************************************************************************************
     
     static func logOut() {
         

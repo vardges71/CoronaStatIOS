@@ -82,7 +82,6 @@ class CountryStatisticViewController: UIViewController, UITableViewDelegate, UIT
         
         jsonParse()
         loadData()
-        
     }
     
     @IBAction func clearButton(_ sender: Any) {
@@ -97,7 +96,6 @@ class CountryStatisticViewController: UIViewController, UITableViewDelegate, UIT
         cTNewDeathsResult = ""
         cTActiveCasesResult = ""
         cTSeriousCasesResult = ""
-        
     }
     
     @IBAction func logOutButton(_ sender: Any) {
@@ -200,7 +198,7 @@ class CountryStatisticViewController: UIViewController, UITableViewDelegate, UIT
                             }
                         }
                     }
-                    
+                
                     DispatchQueue.main.async { self.countryStatTableView.reloadData() }
                 }
             } catch {
@@ -208,25 +206,55 @@ class CountryStatisticViewController: UIViewController, UITableViewDelegate, UIT
                 print(err?.localizedDescription ?? "Error Localize")
             }
         }
-        }
-        .resume()
+        }.resume()
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupElements()
+        
+// *************************************************************************************************************
+        self.cCodeTextField.addDoneButton(title: "Done", target: self, selector: #selector(tapDone(sender:)))
         // Do any additional setup after loading the view.
+        
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+        
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(sender:)), name: UIResponder.keyboardWillShowNotification, object: nil);
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(sender:)), name: UIResponder.keyboardWillHideNotification, object: nil);
+        
+// *************************************************************************************************************
+        
     }
     
-    func loadData() {
+// *************************************************************************************************************
+    
+    @objc func tapDone(sender: Any) {
         
+        self.view.endEditing(true)
+    }
+    
+    @objc func keyboardWillShow(sender: NSNotification) {
+         self.view.frame.origin.y = -130 // Move view 150 points upward
+    }
+
+    @objc func keyboardWillHide(sender: NSNotification) {
+         self.view.frame.origin.y = 0 // Move view to original position
+    }
+    
+// *************************************************************************************************************
+    
+    func loadData() {
+
         countryStatTableView.reloadData()
         countryStatTableView.register(UINib(nibName: "CountryStatisticCell", bundle: nil), forCellReuseIdentifier : "countryCell")
         countryStatTableView.delegate = self
         countryStatTableView.dataSource = self
-        
-        
+
     }
-    
 }

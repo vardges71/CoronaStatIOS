@@ -13,6 +13,9 @@
 		0946B64F2455386B00308A24 /* CTLStatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0946B64E2455386B00308A24 /* CTLStatisticViewController.swift */; };
 		099A20122458872700D1DDDA /* CountryStatisticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 099A20102458872700D1DDDA /* CountryStatisticCell.swift */; };
 		099A20132458872700D1DDDA /* CountryStatisticCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 099A20112458872700D1DDDA /* CountryStatisticCell.xib */; };
+		09A4CCF624638AF400D03D0A /* TimeLineStatisticCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A4CCF424638AF400D03D0A /* TimeLineStatisticCell.swift */; };
+		09A4CCF724638AF400D03D0A /* TimeLineStatisticCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09A4CCF524638AF400D03D0A /* TimeLineStatisticCell.xib */; };
+		09A4CCFB2463CB8900D03D0A /* UITextViewAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A4CCFA2463CB8900D03D0A /* UITextViewAdditions.swift */; };
 		09BA5E1A2454A84A00CC9B36 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA5E192454A84A00CC9B36 /* Utilities.swift */; };
 		09BA5E1C2455011300CC9B36 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BA5E1B2455011300CC9B36 /* Constants.swift */; };
 		09BC88C024541AEC000322AD /* Covid19.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 09BC88BF24541AEC000322AD /* Covid19.mp4 */; };
@@ -38,6 +41,9 @@
 		0985A3FC8A2B26CF3F59FBEB /* Pods-CoronaStatistic.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoronaStatistic.debug.xcconfig"; path = "Target Support Files/Pods-CoronaStatistic/Pods-CoronaStatistic.debug.xcconfig"; sourceTree = "<group>"; };
 		099A20102458872700D1DDDA /* CountryStatisticCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryStatisticCell.swift; sourceTree = "<group>"; };
 		099A20112458872700D1DDDA /* CountryStatisticCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CountryStatisticCell.xib; sourceTree = "<group>"; };
+		09A4CCF424638AF400D03D0A /* TimeLineStatisticCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineStatisticCell.swift; sourceTree = "<group>"; };
+		09A4CCF524638AF400D03D0A /* TimeLineStatisticCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TimeLineStatisticCell.xib; sourceTree = "<group>"; };
+		09A4CCFA2463CB8900D03D0A /* UITextViewAdditions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextViewAdditions.swift; sourceTree = "<group>"; };
 		09BA5E192454A84A00CC9B36 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		09BA5E1B2455011300CC9B36 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		09BC88BF24541AEC000322AD /* Covid19.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = Covid19.mp4; sourceTree = "<group>"; };
@@ -136,6 +142,9 @@
 				091DB8DD2455F0410035A5CA /* GlobalStatisticCell.xib */,
 				099A20102458872700D1DDDA /* CountryStatisticCell.swift */,
 				099A20112458872700D1DDDA /* CountryStatisticCell.xib */,
+				09A4CCF424638AF400D03D0A /* TimeLineStatisticCell.swift */,
+				09A4CCF524638AF400D03D0A /* TimeLineStatisticCell.xib */,
+				09A4CCFA2463CB8900D03D0A /* UITextViewAdditions.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -218,6 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09CD4E0A2453EF2F002F75B4 /* LaunchScreen.storyboard in Resources */,
+				09A4CCF724638AF400D03D0A /* TimeLineStatisticCell.xib in Resources */,
 				09CD4E122453EF99002F75B4 /* GoogleService-Info.plist in Resources */,
 				09CD4E072453EF2F002F75B4 /* Assets.xcassets in Resources */,
 				099A20132458872700D1DDDA /* CountryStatisticCell.xib in Resources */,
@@ -283,11 +293,13 @@
 				09BC88C424541BD2000322AD /* SignInViewController.swift in Sources */,
 				09CD4E052453EF2E002F75B4 /* CoronaStatistic.xcdatamodeld in Sources */,
 				09BC88C224541BB0000322AD /* LogInViewController.swift in Sources */,
+				09A4CCF624638AF400D03D0A /* TimeLineStatisticCell.swift in Sources */,
 				09BC88C624541BF9000322AD /* HomeViewController.swift in Sources */,
 				09BA5E1A2454A84A00CC9B36 /* Utilities.swift in Sources */,
 				099A20122458872700D1DDDA /* CountryStatisticCell.swift in Sources */,
 				0946B64F2455386B00308A24 /* CTLStatisticViewController.swift in Sources */,
 				09CD4DFD2453EF2E002F75B4 /* SceneDelegate.swift in Sources */,
+				09A4CCFB2463CB8900D03D0A /* UITextViewAdditions.swift in Sources */,
 				09BA5E1C2455011300CC9B36 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

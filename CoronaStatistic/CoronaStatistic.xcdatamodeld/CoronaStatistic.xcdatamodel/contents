@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="16119" systemVersion="19E287" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="TotalDays" representedClassName="TotalDays" syncable="YES" codeGenerationType="class">
+        <attribute name="countryResult" optional="YES" attributeType="String"/>
+        <attribute name="dateResult" optional="YES" attributeType="String"/>
+        <attribute name="newCasesResult" optional="YES" attributeType="String"/>
+        <attribute name="newDeathsResult" optional="YES" attributeType="String"/>
+        <attribute name="tCasesResult" optional="YES" attributeType="String"/>
+        <attribute name="tDeathsResult" optional="YES" attributeType="String"/>
+        <attribute name="tRecoveredResult" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="TotalDays" positionX="-63" positionY="-18" width="128" height="148"/>
+    </elements>
 </model>
