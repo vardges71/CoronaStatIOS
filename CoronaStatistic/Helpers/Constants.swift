@@ -23,6 +23,5 @@ struct Constants {
     struct TimelineArray {
         
         static var datesCount = 0
-        
     }
 }

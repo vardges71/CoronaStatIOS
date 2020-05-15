@@ -14,6 +14,10 @@ import CoreData
 class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var cCode = ""
+    var finalStatArray = [TotalDays]()
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
+    var statArray: Array = [""]
     
     let countryLabel = "country: "
     let tCasesLabel = "total cases: "
@@ -22,14 +26,13 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
     let newCasesLabel = "new cases: "
     let newDeathsLabel = "new deaths: "
     
-    var timelineDateResult = ""
-    var countryResult = ""
-    var tCasesResult = ""
-    var tRecoveredResult = ""
-    var tDeathsResult = ""
-    var newCasesResult = ""
-    var newDeathsResult = ""
-    
+//    var timelineDateResult = ""
+//    var countryResult = ""
+//    var tCasesResult = "25603"
+//    var tRecoveredResult = "24777"
+//    var tDeathsResult = "3"
+//    var newCasesResult = "1456"
+//    var newDeathsResult = "1.5"
     
     
     @IBOutlet weak var cLabel: UILabel!
@@ -52,14 +55,16 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return Constants.TimelineArray.datesCount
+        finalStatArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let timeLineStatisticCell = tableView.dequeueReusableCell(withIdentifier: "timeLineCell", for: indexPath) as! TimeLineStatisticCell
+        let timeLineStatisticCell = countryTimeLine.dequeueReusableCell(withIdentifier: "timeLineCell", for: indexPath) as! TimeLineStatisticCell
         
-        timeLineStatisticCell.dateResult.text = timelineDateResult
+        let statistic = finalStatArray[indexPath.row]
+        
+        timeLineStatisticCell.dateResult?.text = statistic.dateResult
         
         timeLineStatisticCell.tCasesLabel.text = tCasesLabel
         timeLineStatisticCell.tRecoveredLabel.text = tRecoveredLabel
@@ -67,11 +72,11 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
         timeLineStatisticCell.newCasesLabel.text = newCasesLabel
         timeLineStatisticCell.newDeathsLabel.text = newDeathsLabel
         
-        timeLineStatisticCell.tCasesResult.text = tCasesResult
-        timeLineStatisticCell.tRecoveredResult.text = tRecoveredResult
-        timeLineStatisticCell.tDeathsResult.text = tDeathsResult
-        timeLineStatisticCell.newCasesResult.text = newCasesResult
-        timeLineStatisticCell.newDeathsResult.text = newDeathsResult
+        timeLineStatisticCell.tCasesResult?.text = statistic.tCasesResult
+        timeLineStatisticCell.tRecoveredResult?.text = statistic.tRecoveredResult
+        timeLineStatisticCell.tDeathsResult?.text = statistic.tDeathsResult
+        timeLineStatisticCell.newCasesResult?.text = statistic.newCasesResult
+        timeLineStatisticCell.newDeathsResult?.text = statistic.newDeathsResult
         
         return timeLineStatisticCell
     }
@@ -80,6 +85,9 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        countryTimeLine.delegate = self
+        countryTimeLine.dataSource = self
+        
         self.cLabel.text = countryLabel
         setupElements()
         
@@ -187,7 +195,7 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
 // ************************************** Display Country Name ******************************************************
                         if let countryTimelineData = json["countrytimelinedata"] as? Array<Dictionary<String, Any>> {
                             for cTLData in countryTimelineData {
-                                if let cInfo = cTLData["info"] as? NSDictionary {
+                                if let cInfo = cTLData["info"] as? Dictionary<String, Any> {
                                     if let cTitle = cInfo["title"] as? String {
                                         self.cResult.text = cTitle
                                         print(cTitle)
@@ -196,17 +204,38 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                             }
                         }
 // ******************************************************************************************************************
-                        if let timelineItems = json["timelineitems"] as? [[String:Any]] {
-                            for timelineItem in timelineItems {
-                                print(timelineItem.count - 1)
-                                Constants.TimelineArray.datesCount = timelineItem.count - 1
-//                                print(timelineItem)
-                            }
-                        }
-                        if let timelineStatistics = json["timelineitems"] as? Array<Dictionary<String, Any>> {
-                            for timelineArray in timelineStatistics {
-                                for (keys, values) in timelineArray {
-                                    print(keys, values)
+                        if let timelineResults = json["timelineitems"] as? NSArray {
+                            for timelineResult in timelineResults {
+//                                print(timelineResult)
+                                
+                                if let dates = timelineResult as? Dictionary<String, Any> {
+                                    
+                                    for (keys, values) in dates {
+                                        
+                                        let newItem = TotalDays(context: self.context)
+                                        newItem.dateResult = String(keys)
+    //                                    print(keys, values)
+                                        
+                                        if let statResult = values as? [String: Int] {
+                                            
+                                            if let totalCases = statResult["total_cases"] {
+                                                newItem.tCasesResult = String(totalCases)
+                                            }
+                                            if let totalRecovered = statResult["total_recoveries"] {
+                                                newItem.tRecoveredResult = String(totalRecovered)
+                                            }
+                                            if let totalDeaths = statResult["total_deaths"] {
+                                                newItem.tDeathsResult = String(totalDeaths)
+                                            }
+                                            if let newCases = statResult["new_daily_cases"] {
+                                                newItem.newCasesResult = String(newCases)
+                                            }
+                                            if let newDeaths = statResult["new_daily_deaths"] {
+                                                newItem.newDeathsResult = String(newDeaths)
+                                            }
+                                        }
+                                    }
+                                    
                                     
                                 }
                             }
@@ -215,10 +244,15 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                         DispatchQueue.main.async { self.countryTimeLine.reloadData() }
                     }
                 } catch {
-                    
+                
                     print(err? .localizedDescription ?? "Localize Description")
                 }
             }
         }.resume()
     }
 }
+
+
+//let newItem = TotalDays(context: self.context)
+//newItem.dateResult = date
+//self.statArray.append(newItem)
