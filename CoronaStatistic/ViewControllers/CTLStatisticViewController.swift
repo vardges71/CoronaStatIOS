@@ -49,6 +49,7 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func btnShowTapped(_ sender: Any) {
         
+        self.finalStatArray.removeAll()
         jsonParse()
         loadData()
     }
