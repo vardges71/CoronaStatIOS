@@ -41,7 +41,6 @@ class CountryStatisticViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
                 
         let countryStatisticCell = tableView.dequeueReusableCell(withIdentifier: "countryCell", for: indexPath) as! CountryStatisticCell
 
@@ -255,6 +254,5 @@ class CountryStatisticViewController: UIViewController, UITableViewDelegate, UIT
         countryStatTableView.register(UINib(nibName: "CountryStatisticCell", bundle: nil), forCellReuseIdentifier : "countryCell")
         countryStatTableView.delegate = self
         countryStatTableView.dataSource = self
-
     }
 }
