@@ -170,7 +170,7 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
 
     }
     
-    func jsonParse () {
+    func jsonParse() {
         
         cCode = countryCodeTextField.text!
         
@@ -208,13 +208,13 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                             for timelineResult in timelineResults {
 //                                print(timelineResult)
                                 
-                                if let dates = timelineResult as? Dictionary<String, Any> {
+                                if let results = timelineResult as? [String: Any] {
                                     
-                                    for (keys, values) in dates {
+                                    for (keys, values) in results {
                                         
                                         let newItem = TotalDays(context: self.context)
                                         newItem.dateResult = String(keys)
-    //                                    print(keys, values)
+                                        print(newItem.dateResult!)
                                         
                                         if let statResult = values as? [String: Int] {
                                             
@@ -234,9 +234,9 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                                                 newItem.newDeathsResult = String(newDeaths)
                                             }
                                         }
+                                        
+                                        self.finalStatArray.append(newItem)
                                     }
-                                    
-                                    
                                 }
                             }
                         }
