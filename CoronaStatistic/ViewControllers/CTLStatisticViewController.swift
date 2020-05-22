@@ -206,11 +206,12 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                         }
 // ******************************************************************************************************************
                         if let timelineResults = json["timelineitems"] as? NSArray {
+                            
                             for timelineResult in timelineResults {
 //                                print(timelineResult)
                                 
-                                if let results = timelineResult as? [String: Any] {
-                                    
+                                if var results = timelineResult as? [String: Any] {
+                                    _ = results.removeValue(forKey: "stat")
                                     for (keys, values) in results {
                                         
                                         let newItem = TotalDays(context: self.context)
