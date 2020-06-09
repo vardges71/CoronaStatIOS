@@ -99,12 +99,20 @@ class CountryStatisticViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBAction func logOutButton(_ sender: Any) {
         
-        Utilities.logOut()
-        
-        let firstVC = self.storyboard?.instantiateViewController(identifier: Constants.Stroryboard.firstVC) as? ViewController
-        
-        self.view.window?.rootViewController = firstVC
-        self.view.window?.makeKeyAndVisible()
+        let alert = UIAlertController(title: "Are you sure?", message: "Do you really want to logOut?", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { acion in
+            
+            Utilities.logOut()
+            
+            let firstVC = self.storyboard?.instantiateViewController(identifier: Constants.Stroryboard.firstVC) as? ViewController
+            
+            self.view.window?.rootViewController = firstVC
+            self.view.window?.makeKeyAndVisible()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
     }
     
     @IBAction func globalStatisticTapped(_ sender: Any) {

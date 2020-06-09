@@ -137,12 +137,20 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBAction func logOutTapped(_ sender: Any) {
         
-        Utilities.logOut()
-        
-        let firstVC = self.storyboard?.instantiateViewController(identifier: Constants.Stroryboard.firstVC) as? ViewController
-        
-        self.view.window?.rootViewController = firstVC
-        self.view.window?.makeKeyAndVisible()
+        let alert = UIAlertController(title: "Are you sure?", message: "Do you really want to logOut?", preferredStyle: .alert)
+
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { acion in
+            
+            Utilities.logOut()
+            
+            let firstVC = self.storyboard?.instantiateViewController(identifier: Constants.Stroryboard.firstVC) as? ViewController
+            
+            self.view.window?.rootViewController = firstVC
+            self.view.window?.makeKeyAndVisible()
+        }))
+        alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: nil))
+
+        self.present(alert, animated: true)
     }
     
     @IBAction func globalStatisticTapped(_ sender: Any) {
@@ -208,7 +216,7 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                         if let timelineResults = json["timelineitems"] as? NSArray {
                             
                             for timelineResult in timelineResults {
-//                                print(timelineResult)
+                                print(timelineResult)
                                 
                                 if var results = timelineResult as? [String: Any] {
                                     _ = results.removeValue(forKey: "stat")
@@ -217,7 +225,7 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                                         let newItem = TotalDays(context: self.context)
                                         newItem.dateResult = String(keys)
                                         print(newItem.dateResult!)
-                                        
+                                        print(results)
                                         if let statResult = values as? [String: Int] {
                                             
                                             if let totalCases = statResult["total_cases"] {

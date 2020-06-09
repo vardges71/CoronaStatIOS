@@ -130,7 +130,6 @@ class SignInViewController: UIViewController {
                     self.transitionToHome()
                 }
             }
-            
         }
     }
     
