@@ -15,9 +15,8 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
     
     var cCode = ""
     var finalStatArray = [TotalDays]()
+//    var statArray = [StatArray]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    var statArray: Array = [""]
     
     let countryLabel = "country: "
     let tCasesLabel = "total cases: "
@@ -25,14 +24,6 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
     let tDeathsLabel = "total deaths: "
     let newCasesLabel = "new cases: "
     let newDeathsLabel = "new deaths: "
-    
-//    var timelineDateResult = ""
-//    var countryResult = ""
-//    var tCasesResult = "25603"
-//    var tRecoveredResult = "24777"
-//    var tDeathsResult = "3"
-//    var newCasesResult = "1456"
-//    var newDeathsResult = "1.5"
     
     
     @IBOutlet weak var cLabel: UILabel!
@@ -178,29 +169,29 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
         countryTimeLine.dataSource = self
 
     }
-    
+        
     func jsonParse() {
-        
+
         cCode = countryCodeTextField.text!
-        
+
         let urlString = "https://api.thevirustracker.com/free-api?countryTimeline=\(cCode)"
         guard let url = URL(string: urlString) else { return }
-        
+
         URLSession.shared.dataTask(with: url) { (data, response, err) in
             DispatchQueue.main.async {
-                
+
                 if let err = err {
 
                     print("Failed to get data from URL", err)
                     return
                 }
-                
+
                 guard let jsonData = data else { return }
-                
+
                 do {
-                    
+
                     if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String:Any] {
-                        
+
 // ************************************** Display Country Name ******************************************************
                         if let countryTimelineData = json["countrytimelinedata"] as? Array<Dictionary<String, Any>> {
                             for cTLData in countryTimelineData {
@@ -215,19 +206,24 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
 // ******************************************************************************************************************
                         if let timelineResults = json["timelineitems"] as? NSArray {
                             
+//                            print(timelineResults)
+                            
                             for timelineResult in timelineResults {
-                                print(timelineResult)
                                 
-                                if var results = timelineResult as? [String: Any] {
-                                    _ = results.removeValue(forKey: "stat")
-                                    for (keys, values) in results {
+//                                    print(timelineResult)
+                                if var result = timelineResult as? [String: Any] {
+                                    
+                                    _ = result.removeValue(forKey: "stat")
+                                    
+                                    for (keys, values) in result {
                                         
                                         let newItem = TotalDays(context: self.context)
                                         newItem.dateResult = String(keys)
-                                        print(newItem.dateResult!)
-                                        print(results)
+                                        
+                                        print("UNSORTED: \(newItem.dateResult ?? "")")
+                                        
                                         if let statResult = values as? [String: Int] {
-                                            
+
                                             if let totalCases = statResult["total_cases"] {
                                                 newItem.tCasesResult = String(totalCases)
                                             }
@@ -244,25 +240,20 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                                                 newItem.newDeathsResult = String(newDeaths)
                                             }
                                         }
-                                        
+
                                         self.finalStatArray.append(newItem)
                                     }
                                 }
                             }
                         }
-                        
+
                         DispatchQueue.main.async { self.countryTimeLine.reloadData() }
                     }
                 } catch {
-                
+
                     print(err? .localizedDescription ?? "Localize Description")
                 }
             }
         }.resume()
     }
 }
-
-
-//let newItem = TotalDays(context: self.context)
-//newItem.dateResult = date
-//self.statArray.append(newItem)

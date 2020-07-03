@@ -31,6 +31,7 @@
 		09CD4E0A2453EF2F002F75B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09CD4E082453EF2F002F75B4 /* LaunchScreen.storyboard */; };
 		09CD4E122453EF99002F75B4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 09CD4E112453EF99002F75B4 /* GoogleService-Info.plist */; };
 		17CF7408B88FE831F3D59A52 /* Pods_CoronaStatistic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4479A6938128DB4D05E19FB3 /* Pods_CoronaStatistic.framework */; };
+		2151861024A1009600DBE90A /* StatArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2151860F24A1009600DBE90A /* StatArray.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		09CD4E092453EF2F002F75B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09CD4E0B2453EF2F002F75B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09CD4E112453EF99002F75B4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2151860F24A1009600DBE90A /* StatArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatArray.swift; sourceTree = "<group>"; };
 		311215D49AB268F905823EF5 /* Pods-CoronaStatistic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CoronaStatistic.release.xcconfig"; path = "Target Support Files/Pods-CoronaStatistic/Pods-CoronaStatistic.release.xcconfig"; sourceTree = "<group>"; };
 		4479A6938128DB4D05E19FB3 /* Pods_CoronaStatistic.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CoronaStatistic.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -122,6 +124,7 @@
 				09BC88C724541C09000322AD /* ViewControllers */,
 				09CD4DFA2453EF2E002F75B4 /* AppDelegate.swift */,
 				09CD4DFC2453EF2E002F75B4 /* SceneDelegate.swift */,
+				2151860F24A1009600DBE90A /* StatArray.swift */,
 				09CD4E002453EF2E002F75B4 /* Main.storyboard */,
 				09BC88BC24540E7C000322AD /* Media */,
 				09CD4E062453EF2F002F75B4 /* Assets.xcassets */,
@@ -291,6 +294,7 @@
 				09CD4DFB2453EF2E002F75B4 /* AppDelegate.swift in Sources */,
 				0946B64D2455382A00308A24 /* CountryStatisticViewController.swift in Sources */,
 				09BC88C424541BD2000322AD /* SignInViewController.swift in Sources */,
+				2151861024A1009600DBE90A /* StatArray.swift in Sources */,
 				09CD4E052453EF2E002F75B4 /* CoronaStatistic.xcdatamodeld in Sources */,
 				09BC88C224541BB0000322AD /* LogInViewController.swift in Sources */,
 				09A4CCF624638AF400D03D0A /* TimeLineStatisticCell.swift in Sources */,
