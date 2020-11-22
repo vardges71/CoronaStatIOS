@@ -81,7 +81,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func jsonParse() {
 
-        let urlString = "https://api.thevirustracker.com/free-api?global=stats"
+//        let urlString = "https://api.thevirustracker.com/free-api?global=stats"
+        let urlString = "https://disease.sh/v3/covid-19/all?yesterday=true&twoDaysAgo=false&allowNull=true"
+        
         guard let url = URL(string: urlString) else { return }
 
         URLSession.shared.dataTask(with: url) { (data, response, err) in
@@ -98,48 +100,48 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
                 if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
 
-                    if let endResults = json["results"] as? Array<Dictionary<String, Any>> {
+//                    if let endResults = json["results"] as? Array<Dictionary<String, Any>> {
 
-                        for endResult in endResults {
+//                        for endResult in json {
 
-                            if let tCases = endResult["total_cases"] as? Int {
+                            if let tCases = json["cases"] as? Int {
                                 self.casesResult = String(tCases)
                                 print(tCases)
                             }
-                            if let tRecovered = endResult["total_recovered"] as? Int {
+                            if let tRecovered = json["recovered"] as? Int {
                                 self.tRecoveredResult = String(tRecovered)
                                 print(tRecovered)
                             }
-                            if let tUnresolved = endResult["total_unresolved"] as? Int {
+                            if let tUnresolved = json["active"] as? Int {
                                 self.tUnresolvedResult = String(tUnresolved)
                                 print(tUnresolved)
                             }
-                            if let tDeaths = endResult["total_deaths"] as? Int {
+                            if let tDeaths = json["deaths"] as? Int {
                                 self.tDeathsResult = String(tDeaths)
                                 print(tDeaths)
                             }
-                            if let newCasesToday = endResult["total_new_cases_today"] as? Int {
+                            if let newCasesToday = json["todayCases"] as? Int {
                                 self.newCasesResult = String(newCasesToday)
                                 print(newCasesToday)
                             }
-                            if let newDeathsToday = endResult["total_new_deaths_today"] as? Int {
+                            if let newDeathsToday = json["todayDeaths"] as? Int {
                                 self.newDeathsResult = String(newDeathsToday)
                                 print(newDeathsToday)
                             }
-                            if let activeCases = endResult["total_active_cases"] as? Int {
+                            if let activeCases = json["active"] as? Int {
                                 self.activeCasesResult = String(activeCases)
                                 print(activeCases)
                             }
-                            if let seriousCases = endResult["total_serious_cases"] as? Int {
+                            if let seriousCases = json["critical"] as? Int {
                                 self.seriousCasesResult = String(seriousCases)
                                 print(seriousCases)
                             }
-                            if let affectedCountries = endResult["total_affected_countries"] as? Int {
+                            if let affectedCountries = json["affectedCountries"] as? Int {
                                 self.affectedCountriesResult = String(affectedCountries)
                                 print(affectedCountries)
                             }
-                        }
-                    }
+//                        }
+//                    }
                     
                     DispatchQueue.main.async { self.globalStatisticTableView.reloadData() }
                 }

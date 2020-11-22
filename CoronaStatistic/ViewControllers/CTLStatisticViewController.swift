@@ -15,7 +15,6 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
     
     var cCode = ""
     var finalStatArray = [TotalDays]()
-//    var statArray = [StatArray]()
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     let countryLabel = "country: "
@@ -211,17 +210,20 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                             for timelineResult in timelineResults {
                                 
 //                                    print(timelineResult)
-                                if var result = timelineResult as? [String: Any] {
-                                    
+                                
+                                if var result = timelineResult as? Dictionary<String, Any> {
+                                
                                     _ = result.removeValue(forKey: "stat")
                                     
+//                                    print(result)
+
                                     for (keys, values) in result {
-                                        
+
                                         let newItem = TotalDays(context: self.context)
                                         newItem.dateResult = String(keys)
-                                        
+
                                         print("UNSORTED: \(newItem.dateResult ?? "")")
-                                        
+
                                         if let statResult = values as? [String: Int] {
 
                                             if let totalCases = statResult["total_cases"] {
