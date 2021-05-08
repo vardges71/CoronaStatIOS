@@ -173,7 +173,7 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
 
         cCode = countryCodeTextField.text!
 
-        let urlString = "https://api.thevirustracker.com/free-api?countryTimeline=\(cCode)"
+        let urlString = "https://disease.sh/v3/covid-19/historical/\(cCode)?lastdays=all"
         guard let url = URL(string: urlString) else { return }
 
         URLSession.shared.dataTask(with: url) { (data, response, err) in
@@ -192,24 +192,19 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
                     if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String:Any] {
 
 // ************************************** Display Country Name ******************************************************
-                        if let countryTimelineData = json["countrytimelinedata"] as? Array<Dictionary<String, Any>> {
-                            for cTLData in countryTimelineData {
-                                if let cInfo = cTLData["info"] as? Dictionary<String, Any> {
-                                    if let cTitle = cInfo["title"] as? String {
-                                        self.cResult.text = cTitle
-                                        print(cTitle)
-                                    }
-                                }
-                            }
+                        
+                        if let cTitle = json["country"] as? String {
+                            self.cResult.text = cTitle
+                            print(cTitle)
                         }
 // ******************************************************************************************************************
-                        if let timelineResults = json["timelineitems"] as? NSArray {
+                        if let timelineResults = json["timeline"] as? NSDictionary {
                             
 //                            print(timelineResults)
                             
                             for timelineResult in timelineResults {
                                 
-//                                    print(timelineResult)
+                                    print(timelineResult)
                                 
                                 if var result = timelineResult as? Dictionary<String, Any> {
                                 
@@ -226,7 +221,7 @@ class CTLStatisticViewController: UIViewController, UITableViewDelegate, UITable
 
                                         if let statResult = values as? [String: Int] {
 
-                                            if let totalCases = statResult["total_cases"] {
+                                            if let totalCases = statResult["cases"] {
                                                 newItem.tCasesResult = String(totalCases)
                                             }
                                             if let totalRecovered = statResult["total_recoveries"] {

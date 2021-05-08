@@ -143,7 +143,7 @@ class CountryStatisticViewController: UIViewController, UITableViewDelegate, UIT
         cCode = cCodeTextField.text!
         
 //        let urlString = "https://api.thevirustracker.com/free-api?countryTotal=\(cCode)"
-        let urlString = "https://disease.sh/v3/covid-19/countries/\(cCode)?yesterday=false&twoDaysAgo=false&strict=true&allowNull=true"
+        let urlString = "https://disease.sh/v3/covid-19/countries/\(cCode)?yesterday=false&twoDaysAgo=false&strict=true"
         guard let url = URL(string: urlString) else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, err) in
@@ -160,52 +160,43 @@ class CountryStatisticViewController: UIViewController, UITableViewDelegate, UIT
                 
                 if let json = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
                     
-//                    if let endResults = json["countrydata"] as? Array<Dictionary<String, Any>> {
-                        
-//                        for endResult in json {
-
-//                            if let countryName = endResult["info"] as? Dictionary<String, Any> {
-                                    
-                                if let cTitle = json["country"] as? String {
-                                self.countryResult = cTitle
-                                print("Country Statistic : \(cTitle)")
-                                }
-//                            }
-                            
-                            if let tCases = json["cases"] as? Int {
-                                self.cTCasesResult = String(tCases)
-                                print(tCases)
-                            }
-                            if let tRecovered = json["recovered"] as? Int {
-                                self.cTRecoveredResult = String(tRecovered)
-                                print(tRecovered)
-                            }
-                            if let tUnresolved = json["active"] as? Int {
-                                self.cTUnresolvedResult = String(tUnresolved)
-                                print(tUnresolved)
-                            }
-                            if let tDeaths = json["deaths"] as? Int {
-                                self.cTDeathsResult = String(tDeaths)
-                                print(tDeaths)
-                            }
-                            if let newCasesToday = json["todayCases"] as? Int {
-                                self.cTNewCasesResult = String(newCasesToday)
-                                print(newCasesToday)
-                            }
-                            if let newDeathsToday = json["todayDeaths"] as? Int {
-                                self.cTNewDeathsResult = String(newDeathsToday)
-                                print(newDeathsToday)
-                            }
-                            if let activeCases = json["active"] as? Int {
-                                self.cTActiveCasesResult = String(activeCases)
-                                print(String(activeCases))
-                            }
-                            if let seriousCases = json["critical"] as? Int {
-                                self.cTSeriousCasesResult = String(seriousCases)
-                                print(String(seriousCases))
-                            }
-//                        }
-//                    }
+                    if let cTitle = json["country"] as? String {
+                        self.countryResult = cTitle
+                        print("Country Statistic : \(cTitle)")
+                    }
+                    
+                    if let tCases = json["cases"] as? Int {
+                        self.cTCasesResult = String(tCases)
+                        print(tCases)
+                    }
+                    if let tRecovered = json["recovered"] as? Int {
+                        self.cTRecoveredResult = String(tRecovered)
+                        print(tRecovered)
+                    }
+                    if let tUnresolved = json["undefined"] as? Int {
+                        self.cTUnresolvedResult = String(tUnresolved)
+                        print(tUnresolved)
+                    }
+                    if let tDeaths = json["deaths"] as? Int {
+                        self.cTDeathsResult = String(tDeaths)
+                        print(tDeaths)
+                    }
+                    if let newCasesToday = json["todayCases"] as? Int {
+                        self.cTNewCasesResult = String(newCasesToday)
+                        print(newCasesToday)
+                    }
+                    if let newDeathsToday = json["todayDeaths"] as? Int {
+                        self.cTNewDeathsResult = String(newDeathsToday)
+                        print(newDeathsToday)
+                    }
+                    if let activeCases = json["active"] as? Int {
+                        self.cTActiveCasesResult = String(activeCases)
+                        print(String(activeCases))
+                    }
+                    if let seriousCases = json["critical"] as? Int {
+                        self.cTSeriousCasesResult = String(seriousCases)
+                        print(String(seriousCases))
+                    }
                 
                     DispatchQueue.main.async { self.countryStatTableView.reloadData() }
                 }
